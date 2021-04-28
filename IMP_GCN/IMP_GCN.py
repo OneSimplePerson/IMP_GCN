@@ -53,10 +53,10 @@ class IMP_GCN(object):
         self.pos_items = tf.placeholder(tf.int32, shape=(None,))
         self.neg_items = tf.placeholder(tf.int32, shape=(None,))
 
-        # dropout: node dropout (adopted on the ego-networks);
+        # dropout: 节点丢弃node dropout (adopted on the ego-networks);
         #          ... since the usage of node dropout have higher computational cost,
         #          ... please use the 'node_dropout_flag' to indicate whether use such technique.
-        #          message dropout (adopted on the convolution operations).
+        #          消息丢弃message dropout (adopted on the convolution operations).
         self.node_dropout_flag = args.node_dropout_flag
         self.node_dropout = tf.placeholder(tf.float32, shape=[None])
         self.mess_dropout = tf.placeholder(tf.float32, shape=[None])
@@ -67,7 +67,7 @@ class IMP_GCN(object):
         # initialization of model parameters
         self.weights = self._init_weights()
 
-        
+        #比lightgcn多了self.A_fold_hat_group_filter, self.user_group_embeddings
         self.ua_embeddings, self.ia_embeddings, self.A_fold_hat_group_filter, self.user_group_embeddings = self._create_imp_gcn_embed()
         """
         *********************************************************
